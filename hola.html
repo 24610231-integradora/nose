@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar sesión</title>
+  <style>
+    body { font-family: Arial; background:#eef; display:flex; justify-content:center; align-items:center; height:100vh; }
+    form { background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); width:300px; }
+    input, button { width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:5px; }
+    button { background:#28a745; color:white; border:none; cursor:pointer; }
+    button:hover { background:#1e7e34; }
+  </style>
+</head>
+<body>
+  <form id="formLogin">
+    <h2>Iniciar sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('formLogin');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if(email === localStorage.getItem('email') && password === localStorage.getItem('password')){
+        window.location.href = "materia.html";
+      } else {
+        alert("Datos incorrectos");
+      }
+    });
+  </script>
+</body>
+</html>

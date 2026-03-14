@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar materias</title>
+  <style>
+    body { font-family: Arial; background:#f4f4f4; padding:20px; }
+    .form-group { margin:10px 0; }
+    input, select, button { padding:10px; margin:5px; border:1px solid #ccc; border-radius:5px; }
+    button { background:#007BFF; color:white; border:none; cursor:pointer; }
+    button:hover { background:#0056b3; }
+    ul { background:#fff; padding:15px; border-radius:8px; box-shadow:0 0 5px rgba(0,0,0,0.1); list-style:none; }
+    li { padding:10px; border-bottom:1px solid #eee; }
+    li:last-child { border-bottom:none; }
+    .materia-info { font-size:14px; color:#555; }
+  </style>
+</head>
+<body>
+  <h2>Bienvenido, <span id="usuario"></span></h2>
+  <p>Agrega tus materias:</p>
+  
+  <div class="form-group">
+    <input type="text" id="materia" placeholder="Nombre de la materia" style="width:200px;">
+  </div>
+  
+  <div class="form-group">
+    <select id="dia">
+      <option value="">Seleccionar día</option>
+      <option value="Lunes">Lunes</option>
+      <option value="Martes">Martes</option>
+      <option value="Miércoles">Miércoles</option>
+      <option value="Jueves">Jueves</option>
+      <option value="Viernes">Viernes</option>
+      <option value="Sábado">Sábado</option>
+      <option value="Domingo">Domingo</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <input type="number" id="horas" placeholder="Horas" min="1" max="8" style="width:80px;">
+  </div>
+  
+  <button onclick="agregarMateria()">Agregar</button>
+  
+  <ul id="listaMaterias"></ul>
+  
+  <button onclick="finalizar()" style="background:#28a745;">Finalizar</button>
+
+  <script>
+    document.getElementById('usuario').textContent = localStorage.getItem('nombre');
+    const lista = document.getElementById('listaMaterias');
+
+    function agregarMateria(){
+      const materia = document.getElementById('materia').value;
+      const dia = document.getElementById('dia').value;
+      const horas = document.getElementById('horas').value;
+      
+      if(materia && dia && horas){
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${materia}</strong><br><span class="materia-info">Día: ${dia} - Horas: ${horas}</span>`;
+        lista.appendChild(li);
+        document.getElementById('materia').value = "";
+        document.getElementById('dia').value = "";
+        document.getElementById('horas').value = "";
+      } else {
+        alert("Por favor completa todos los campos");
+      }
+    }
+
+    function finalizar(){
+      alert("Registro finalizado. ¡Gracias!");
+      localStorage.clear();
+      window.location.href = "crear_cuenta.html";
+    }
+  </script>
+</body>
+</html>
